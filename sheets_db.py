@@ -11,7 +11,7 @@ creds = Credentials.from_service_account_info(
 )
 
 client = gspread.authorize(creds)
-sheet = client.open("Library").worksheet("books")
+sheet = client.open("library").worksheet("books")
 
 
 def get_book(book_id):
