@@ -1,19 +1,17 @@
+import streamlit as st
 import gspread
 from google.oauth2.service_account import Credentials
 from datetime import datetime
 
-SCOPES = [
-    "https://www.googleapis.com/auth/spreadsheets",
-    "https://www.googleapis.com/auth/drive",
-]
+SCOPES = ["https://www.googleapis.com/auth/spreadsheets"]
 
-creds = Credentials.from_service_account_file(
-    "service_account.json",
+creds = Credentials.from_service_account_info(
+    st.secrets["gcp_service_account"],
     scopes=SCOPES
 )
 
 client = gspread.authorize(creds)
-sheet = client.open("library").worksheet("books")
+sheet = client.open("Library").worksheet("books")
 
 
 def get_book(book_id):
